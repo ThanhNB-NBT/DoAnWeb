@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Thành viên";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <main id="main">
+
+        <!-- ======= Our Team Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <ol>
+                        <li><a href="~/home">Trang chủ</a></li>
+                        <li>Thành viên</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section><!-- End Our Team Section -->
+        @await Component.InvokeAsync("MemberView")
+
+    </main><!-- End #main -->
+</body>
+</html>
+

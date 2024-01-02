@@ -1,0 +1,67 @@
+﻿@using DoAnWeb.Models;
+
+@{
+    var abouts = ViewData["Abouts"] as List<About>;
+    var members = ViewData["Members"] as List<Member>;
+}
+
+<!-- ======= About Section ======= -->
+<section class="about" data-aos="fade-up">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <img src="~/img/about.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0">
+                @foreach (var about in abouts)
+                {
+                    <h3>@about.Title</h3>
+                    <p class="fst-italic">
+                        @about.AboutUs
+                    </p>
+
+                    <p>
+                        @about.OurStory
+                    </p>
+                }
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- End About Section -->
+<!-- ======= Tetstimonials Section ======= -->
+<section class="testimonials" data-aos="fade-up">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>LỜI CHIA SẺ CỦA CHÚNG TÔI</h2>
+
+        </div>
+        <div class="testimonials-carousel swiper">
+            <div class="swiper-wrapper">
+                @foreach (var mm in members)
+                {
+                    <div class="testimonial-item swiper-slide">
+                        <img src="~/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                        <h3>@mm.Name</h3>
+                        <h4>@mm.WorkPosition</h4>
+                        <p>
+                            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                            @mm.Message
+                            <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                        </p>
+                    </div>
+                }
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+
+
+    </div>
+</section>
+<!-- End Ttstimonials Section -->
+

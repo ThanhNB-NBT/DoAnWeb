@@ -1,0 +1,38 @@
+﻿@using DoAnWeb.Utilities;
+@using DoAnWeb.Models;
+@model IEnumerable<Blog>
+@{
+    List<BlogComment> blogComments = ViewBag.blogComment;
+}
+
+<!-- ======= Blog Section ======= -->
+@foreach (var bg in Model)
+{
+    string url = Functions.TitleSlugGeneration("Blog", bg.Title, bg.BlogId);
+
+    <article class="entry">
+
+        <div class="entry-img">
+            <img src="@bg.Image" alt="" class="img-fluid">
+        </div>
+        <h2 class="entry-title">
+            <a href="/@url">@bg.Title</a>
+        </h2>
+        <div class="entry-meta">
+            <ul>
+                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="/@url">@bg.CreatedBy</a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="/@url"><time>@bg.CreatedDate</time></a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> @blogComments.Count() Comment</li>
+            </ul>
+        </div>
+        <div class="entry-content">
+            <p>
+                @bg.Description
+            </p>
+            <div class="read-more">
+                <a href="/@url">Xem thêm</a>
+            </div>
+        </div>
+    </article>
+}
+<!-- End Blog Section -->

@@ -1,0 +1,29 @@
+﻿@model IList<Project>
+@using DoAnWeb.Utilities;
+
+@{
+    ViewData["Title"] = "Default";
+}
+
+
+@foreach (var pr in Model)
+{
+    string url = Functions.TitleSlugGeneration("Projects", pr.ProjectName, pr.ProjectId);
+    <div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
+        <div class="portfolio-item">
+            <img src="@pr.Image" class="img-fluid" alt="">
+            <div class="portfolio-info">
+                <h3>@pr.ProjectName</h3>
+                <div>
+                    <a href="@pr.Image" data-gallery="portfolioGallery" class="portfolio-lightbox" title="@pr.ProjectName"><i class="bx bx-plus"></i></a>
+                    <a href="~/@url" title="Project Details"><i class="bx bx-link"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
