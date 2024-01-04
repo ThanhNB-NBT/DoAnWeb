@@ -2,7 +2,7 @@
 @using DoAnWeb.Models;
 @model IEnumerable<Blog>
 @{
-    List<BlogComment> blogComments = ViewBag.blogComment;
+    List<BlogComment> blogsWithCommentCount = ViewBag.BlogsWithCommentCount;
 }
 
 <!-- ======= Blog Section ======= -->
@@ -22,7 +22,7 @@
             <ul>
                 <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="/@url">@bg.CreatedBy</a></li>
                 <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="/@url"><time>@bg.CreatedDate</time></a></li>
-                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> @blogComments.Count() Comment</li>
+                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> @blogsWithCommentCount.Count() Comment</li>
             </ul>
         </div>
         <div class="entry-content">

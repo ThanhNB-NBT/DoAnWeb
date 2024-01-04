@@ -18,7 +18,16 @@ namespace DoAnWeb.Controllers
         // GET: BlogController
         public ActionResult Index()
         {
-            ViewBag.blogComment = _context.BlogComments.ToList();
+            var blogs = _context.Blogs.ToList();
+
+            // Lặp qua từng bài blog và đếm số lượng comment cho mỗi blog
+            var blogsWithCommentCount = blogs.Select(blog => new
+            {
+                Blog = blog,
+                CommentCount = _context.BlogComments.Count(comment => comment.BlogId == blog.BlogId)
+            }).ToList();
+
+            ViewBag.BlogsWithCommentCount = blogsWithCommentCount;
             return View();
         }
 

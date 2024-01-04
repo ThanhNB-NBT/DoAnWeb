@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DoAnWeb.Models;
 
@@ -24,4 +25,7 @@ public partial class Menu
     public int? MenuOrder { get; set; }
 
     public int? Position { get; set; }
+
+    [ForeignKey("ParentId")]
+    public Menu ParentMenu { get; set; }
 }

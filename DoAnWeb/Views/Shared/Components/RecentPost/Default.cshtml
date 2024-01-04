@@ -7,7 +7,7 @@
     {
         string url = Functions.TitleSlugGeneration("blog", rp.Title, rp.BlogId);
         <div class="post-item clearfix">
-        <img src="~/img/blog/@rp.Image" alt="">
+        <img src="@rp.Image" alt="">
         <h4><a href="~/@url">@rp.Title</a></h4>
         <time>@rp.CreatedDate</time>
         </div>
