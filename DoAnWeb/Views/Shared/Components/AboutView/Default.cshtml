@@ -4,7 +4,20 @@
     var abouts = ViewData["Abouts"] as List<About>;
     var members = ViewData["Members"] as List<Member>;
 }
-
+<style>
+    .imgmess{
+        width: 120px;
+        height:120px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    /* .imgmess img{
+        width: 100%;
+        height: 100%;
+        
+    } */
+        
+</style>
 <!-- ======= About Section ======= -->
 <section class="about" data-aos="fade-up">
     <div class="container">
@@ -47,12 +60,12 @@
                 @foreach (var mm in members)
                 {
                     <div class="testimonial-item swiper-slide">
-                        <img src="@mm.Image " class="testimonial-img" alt="">
+                        <img src="@mm.Image " class="testimonial-img imgmess" alt="">
                         <h3>@mm.Name</h3>
                         <h4>@mm.WorkPosition</h4>
                         <p>
                             <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                            @mm.Message
+                            @Html.Raw(mm.Message)
                             <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                         </p>
                     </div>

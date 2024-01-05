@@ -1,6 +1,14 @@
 ﻿@using DoAnWeb.Models;
 @model IList<Member>
 
+
+<style>
+    .img-member{
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    }
+</style>
 <!-- ======= Team Section ======= -->
 <section class="team" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
     <div class="container">
@@ -11,7 +19,7 @@
                 <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                     <div class="member">
                         <div class="member-img">
-                            <img src="@mb.Image" class="img-fluid" alt="">
+                            <img src="@mb.Image" class="img-fluid img-member" alt="">
                             <div class="social">
                                 <a href=""><i class="bi bi-facebook"></i></a>
                                 <a href=""><i class="bi bi-instagram"></i></a>

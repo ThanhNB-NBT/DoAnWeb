@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAnWeb.Models;
+using X.PagedList;
 
 namespace DoAnWeb.Areas.Admin.Controllers
 {
@@ -20,9 +21,13 @@ namespace DoAnWeb.Areas.Admin.Controllers
         }
 
         // GET: Admin/Members
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(await _context.Members.ToListAsync());
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+
+            var members = await _context.Members.ToPagedListAsync(pageNumber, pageSize);
+            return View(members);
         }
 
         // GET: Admin/Members/Details/5
@@ -58,9 +63,19 @@ namespace DoAnWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(member);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(member);
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Thành viên mới đã thêm thành công!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    // Log lỗi hoặc xử lý lỗi theo nhu cầu của bạn
+                    TempData["ErrorMessage"] = "Có lỗi xảy ra khi thêm thành viên. Vui lòng thử lại.";
+                }
             }
             return View(member);
         }
@@ -99,11 +114,13 @@ namespace DoAnWeb.Areas.Admin.Controllers
                 {
                     _context.Update(member);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Thông tin thành viên đã chỉnh sửa thành công!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!MemberExists(member.MemberId))
                     {
+                        TempData["ErrorMessage"] = "Có lỗi xảy ra khi chỉnh sửa thông tin. Vui lòng thử lại.";
                         return NotFound();
                     }
                     else

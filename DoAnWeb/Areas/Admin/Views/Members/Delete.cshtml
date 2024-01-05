@@ -4,60 +4,74 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="container-fluid">
+    <div class="container-fluid">
+        <h5 class="card-title fw-semibold mb-4">Bạn chắc chắn muốn xóa?</h5>
+        <div class="card">
+            <div class="card-body">
+                <h4>@Model.Name</h4>
+                <div>
+                    <h4>Member</h4>
+                    <dl class="row">
+                        <dt class="col-sm-2 fw-semibold border-bottom-0">
+                            Tên thành viên:
+                        </dt>
+                        <dd class="col-sm-10 fw-semibold border-bottom-0">
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+                        <dt class="col-sm-2 fw-semibold border-bottom-0">
+                            Hiển thị
+                        </dt>
+                        <dd class="col-sm-10 fw-semibold border-bottom-0">
+                            @if (Model.IsActive)
+                            {
+                                <span class="text-success">Có</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger">Không</span>
+                            }
+                        </dd>
+                        <dt class="col-sm-2 fw-semibold border-bottom-0">
+                            Vị trí làm việc:
+                        </dt>
+                        <dd class="col-sm-10 fw-semibold border-bottom-0">
+                            @Html.DisplayFor(model => model.WorkPosition)
+                        </dd>
+                        <dt class="col-sm-2 fw-semibold border-bottom-0">
+                            Chi tiết:
+                        </dt>
+                        <dd class="col-sm-10 fw-semibold border-bottom-0">
+                            @Html.DisplayFor(model => model.Detail)
+                        </dd>
+                        @* <dt class="col-sm-2 fw-semibold border-bottom-0">
+                            @Html.DisplayNameFor(model => model.Link)
+                        </dt>
+                        <dd class="col-sm-10 fw-semibold border-bottom-0">
+                            @Html.DisplayFor(model => model.Link)
+                        </dd> *@
+                        <dt class="col-sm-2 fw-semibold border-bottom-0">
+                            Lời nhắn:
+                        </dt>
+                        <dd class="col-sm-10 fw-semibold border-bottom-0">
+                            @Html.DisplayFor(model => model.Message)
+                        </dd>
+                        <dt class="col-sm-2 fw-semibold border-bottom-0">
+                            Hình ảnh:
+                        </dt>
+                        <dd class="col-sm-10 fw-semibold border-bottom-0">
+                            @Html.DisplayFor(model => model.Image)
+                        </dd>
+                    </dl>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Member</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WorkPosition)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WorkPosition)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Detail)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Detail)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Link)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Link)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Message)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="MemberId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="MemberId" />
+                        <input type="submit" value="Xóa" class="btn btn-danger btn-delete m-1" /> |
+                        <a asp-action="Index" type="button" class="btn btn-outline-primary m-1">Quay lại</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+

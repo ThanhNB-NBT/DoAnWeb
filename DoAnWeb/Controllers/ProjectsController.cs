@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DoAnWeb.Models;
 
-namespace WebDoAn.Controllers
+namespace DoAnWeb.Controllers
 {
     public class ProjectsController : Controller
     {

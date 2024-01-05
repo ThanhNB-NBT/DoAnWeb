@@ -1,61 +1,76 @@
 ﻿@model DoAnWeb.Models.Member
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Chỉnh sửa";
 }
-
-<h1>Edit</h1>
-
-<h4>Member</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="MemberId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Chỉnh sửa @Model.Name</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="MemberId" />
+                            <div class="form-group mb-3">
+                                <label asp-for="Name" class="contro-label form-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="WorkPosition" class="contro-label form-label"></label>
+                                <input asp-for="WorkPosition" class="form-control" />
+                                <span asp-validation-for="WorkPosition" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Detail" class="contro-label form-label"></label>
+                                <input asp-for="Detail" class="form-control" />
+                                <span asp-validation-for="Detail" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Link" class="contro-label form-label"></label>
+                                <input asp-for="Link" class="form-control" />
+                                <span asp-validation-for="Link" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Message" class="contro-label form-label"></label>
+                                <textarea asp-for="Message" id="Message" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label asp-for="Image" class="control-label form-label"></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-success m-1 form-label" onclick="openDialog()">Chọn hình ảnh</button>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" class="form-control " id="file_input" asp-for="Image" aria-describedby="button-addon2">
+                                </div>
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                            @* <div class="form-group mb-3">
+                            <label asp-for="Image" class="contro-label form-label"></label>
+                            <input asp-for="Image" class="form-control" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                            </div> *@
+                            <div class="form-group mb-3 mb-3 form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="IsActive" />Hiển thị
+                                </label>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="submit" value="Lưu" class="btn btn-primary" />|
+                                <a asp-action="Index" type="button" class="btn btn-outline-primary m-1">Quay lại</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="WorkPosition" class="control-label"></label>
-                <input asp-for="WorkPosition" class="form-control" />
-                <span asp-validation-for="WorkPosition" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Detail" class="control-label"></label>
-                <input asp-for="Detail" class="form-control" />
-                <span asp-validation-for="Detail" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Link" class="control-label"></label>
-                <input asp-for="Link" class="form-control" />
-                <span asp-validation-for="Link" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Message" class="control-label"></label>
-                <input asp-for="Message" class="form-control" />
-                <span asp-validation-for="Message" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@{
+    var summerNote = new DoAnWeb.Areas.Admin.Models.SummerNote("#Message");
+}
+<partial name="_SummerNote" model="summerNote" />
 
