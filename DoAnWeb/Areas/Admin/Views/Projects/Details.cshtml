@@ -1,0 +1,89 @@
+﻿@model DoAnWeb.Models.Project
+
+@{
+    ViewData["Title"] = "Chi tiết";
+}
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Chi tiết</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <h4>@Model.ProjectName</h4>
+                        <div>
+                            <dl class="row">
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Tên dự án:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.ProjectName)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Hiển thị:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0 fw-semibold border-bottom-0">
+                                    @if (Model.IsActive)
+                                    {
+                                        <span class="text-success">Có</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Không</span>
+                                    }
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Hình ảnh:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Image)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Ngày tạo:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.CreatedDate)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Tiêu đề
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Title)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Chi tiết
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Detail)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Khách hàng
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Client)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.Link)
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Link)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Danh mục:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.CategoryP.Name)
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model?.ProjectId" class="btn btn-danger btn-edit m-1">Sửa</a> |
+                    <a asp-action="Index" type="button" class="btn btn-outline-primary m-1">Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

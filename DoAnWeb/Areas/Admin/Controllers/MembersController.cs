@@ -156,13 +156,23 @@ namespace DoAnWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var member = await _context.Members.FindAsync(id);
-            if (member != null)
+            try
             {
-                _context.Members.Remove(member);
+                var member = await _context.Members.FindAsync(id);
+                if (member != null)
+                {
+                    _context.Members.Remove(member);
+                }
+
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Dự án đã được xóa thành công!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Có lỗi xảy ra khi xóa dự án. Vui lòng thử lại.";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

@@ -76,4 +76,13 @@
         </div>
     </div>
 </body>
+<script>
+    $(document).ready(function () {
+        // Ẩn thông báo sau 2 giây (2000 milliseconds)
+        setTimeout(function () {
+            $("#successAlert").fadeOut(500);
+            $("#errorAlert").fadeOut(500);
+        }, 2000);
+    });
+</script>
 </html>

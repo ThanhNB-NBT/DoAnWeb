@@ -77,11 +77,18 @@ namespace DoAnWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MenuId,MenuName,IsActive,ControllerName,ActionName,Levels,ParentId,Link,MenuOrder,Position")] Menu menu)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(menu);
+               _context.Add(menu);
                 await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Menu mới đã thêm thành công!";
                 return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi hoặc xử lý lỗi theo nhu cầu của bạn
+                TempData["ErrorMessage"] = "Có lỗi xảy ra khi thêm Menu. Vui lòng thử lại.";
             }
             return View(menu);
         }
@@ -121,11 +128,13 @@ namespace DoAnWeb.Areas.Admin.Controllers
                 {
                     _context.Update(menu);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Thông tin Menu đã chỉnh sửa thành công!";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!MenuExists(menu.MenuId))
                     {
+                        TempData["ErrorMessage"] = "Có lỗi xảy ra khi chỉnh sửa thông tin. Vui lòng thử lại.";
                         return NotFound();
                     }
                     else
@@ -161,13 +170,23 @@ namespace DoAnWeb.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var menu = await _context.Menus.FindAsync(id);
-            if (menu != null)
+            try
             {
-                _context.Menus.Remove(menu);
+                var menu = await _context.Menus.FindAsync(id);
+                if (menu != null)
+                {
+                    _context.Menus.Remove(menu);
+                }
+
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Menu đã được xóa thành công!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Có lỗi xảy ra khi xóa Menu. Vui lòng thử lại.";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

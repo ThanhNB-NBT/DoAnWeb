@@ -1,13 +1,19 @@
-﻿@model IPagedList<DoAnWeb.Models.Menu>
-
+﻿@model IPagedList<DoAnWeb.Models.Project>
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
 @{
-    ViewData["Title"] = "Menu";
+    ViewData["Title"] = "Dự án";
     var successMessage = TempData["SuccessMessage"] as string;
     var errorMessage = TempData["ErrorMessage"] as string;
 }
+
 <style>
+    .truncate-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 75px; /* Điều chỉnh giới hạn độ dài tùy ý */
+    }
     .pagination-container {
         display: flex;
         justify-content: center;
@@ -40,7 +46,6 @@
     .pagination-item:last-child {
         margin-right: 0;
     }
-
 </style>
 
 <div class="container-fluid">
@@ -48,7 +53,7 @@
         <div class="d-flex align-items-stretch">
             <div class="card w-100">
                 <div class="card-body p-4">
-                    <h5 class="card-title fw-semibold mb-4">Quản lý Menu</h5>
+                    <h5 class="card-title fw-semibold mb-4">Quản lý Dự án</h5>
                     @if (!string.IsNullOrEmpty(successMessage))
                     {
                         <div id="successAlert" class="alert alert-success">
@@ -77,28 +82,31 @@
                                         <h6 class="fw-semibold mb-0">STT</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Menu</h6>
+                                        <h6 class="fw-semibold mb-0">Tên dự án</h6>
                                     </th>
                                     <th class="border-bottom-0">
                                         <h6 class="fw-semibold mb-0">Hiển thị</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Controller</h6>
+                                        <h6 class="fw-semibold mb-0">Hình ảnh</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Action</h6>
+                                        <h6 class="fw-semibold mb-0">Ngày tạo</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Cấp</h6>
+                                        <h6 class="fw-semibold mb-0">Tiêu đề</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Mã cha</h6>
+                                        <h6 class="fw-semibold mb-0">Chi tiết</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Thứ tự</h6>
+                                        <h6 class="fw-semibold mb-0">Khách hàng</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Vị trí</h6>
+                                        <h6 class="fw-semibold mb-0">Link</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Danh mục</h6>
                                     </th>
                                     <th class="border-bottom-0">
                                         <h6 class="fw-semibold mb-0">Chức năng</h6>
@@ -117,56 +125,47 @@
                                             <h6 class="fw-semibold mb-0">@(i++)</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">@item.MenuName</h6>
+                                            <h6 class="fw-semibold mb-0">@item.ProjectName</h6>
                                         </td>
                                         <td class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">@Html.CheckBox("true", @item.IsActive)</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">@item.ControllerName</h6>
+                                            <img style="max-width: 30px;height: auto;" src="@item.Image" />
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">@item.ActionName</h6>
+                                            <h6 class="fw-semibold mb-0">@item.CreatedDate?.ToShortDateString()</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">@item.Levels</h6>
+                                            <h6 class="fw-semibold mb-0 truncate-text">@item.Title</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">
-                                                @{
-                                                    if (item.ParentId == null || item.ParentId == 0)
-                                                    {
-                                                        <text>Không có</text>
-                                                    }
-                                                    else
-                                                    {
-                                                        @Html.DisplayFor(modelItem => item.ParentName)
-                                                    }
-                                                }
-                                            </h6>
+                                            <h6 class="fw-semibold mb-0 truncate-text">@item.Detail</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">@item.MenuOrder</h6>
+                                            <h6 class="fw-semibold mb-0 truncate-text">@item.Client</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">@item.Position</h6>
+                                            <h6 class="fw-semibold mb-0 truncate-text">@item.Link</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <a asp-action="Edit" asp-route-id="@item.MenuId" class="btn btn-danger btn-sm btn-edit">Sửa</a> |
-                                            <a asp-action="Details" asp-route-id="@item.MenuId" class="btn btn-info btn-sm btn-detail">Chi tiết</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.MenuId" data-id="@item.MenuId" class="btn btn-warning btn-sm btn-delete">Xóa</a>
+                                            <h6 class="fw-semibold mb-0">@item.CategoryP.Name</h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <a asp-action="Edit" asp-route-id="@item.ProjectId" class="btn btn-danger btn-sm btn-edit">Sửa</a> |
+                                            <a asp-action="Details" asp-route-id="@item.ProjectId" class="btn btn-info btn-sm btn-detail">Chi tiết</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.ProjectId" data-id="@item.ProjectId" class="btn btn-warning btn-sm btn-delete">Xóa</a>
                                         </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <div class="pagination-container">
-                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded,LiElementClasses = new[] { "pagination-item" }})
-                        </div>
+                    </div>
+                    <div class="pagination-container">
+                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, LiElementClasses = new[] { "pagination-item" } })
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
