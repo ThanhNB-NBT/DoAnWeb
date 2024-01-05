@@ -25,7 +25,6 @@ public partial class Menu
     public int? MenuOrder { get; set; }
 
     public int? Position { get; set; }
-
-    [ForeignKey("ParentId")]
-    public Menu ParentMenu { get; set; }
+    [NotMapped] // Đánh dấu thuộc tính này không phải là một cột trong cơ sở dữ liệu
+    public string? ParentName { get; set; } = string.Empty;
 }
