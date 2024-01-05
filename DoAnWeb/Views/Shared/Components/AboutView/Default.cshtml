@@ -20,10 +20,12 @@
                     <p class="fst-italic">
                         @about.AboutUs
                     </p>
-
-                    <p>
-                        @about.OurStory
-                    </p>
+                    <ul>
+                        <li><i class="bi bi-check2-circle"></i> Chúng tôi có ba nguyên lý cơ bản - Đổi mới, Minh bạch và Nhanh nhẹn - trung tâm của các tương tác giữa nhân viên và khách hàng của chúng tôi.</li>
+                        <li><i class="bi bi-check2-circle"></i> Chúng tôi thu hút và phát triển tài năng để trở thành nhà lãnh đạo tư tưởng công nghệ bằng cách thúc đẩy văn hóa hợp tác, cởi mở và học tập suốt đời.</li>
+                        <li><i class="bi bi-check2-circle"></i> Trở thành một tập đoàn được quốc tế công nhận, tận dụng công nghệ để cung cấp các giải pháp sáng tạo, do các chuyên gia hạng nhất mang lại.</li>
+                    </ul>
+                    
                 }
 
             </div>
@@ -45,7 +47,7 @@
                 @foreach (var mm in members)
                 {
                     <div class="testimonial-item swiper-slide">
-                        <img src="~/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                        <img src="@mm.Image " class="testimonial-img" alt="">
                         <h3>@mm.Name</h3>
                         <h4>@mm.WorkPosition</h4>
                         <p>
