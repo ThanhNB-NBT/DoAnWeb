@@ -65,6 +65,7 @@ public partial class DoAnWebContext : DbContext
             entity.Property(e => e.Phone).HasMaxLength(50);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.UserName).HasMaxLength(50);
+            entity.Property(e => e.Image).HasMaxLength(50);
 
             entity.HasOne(d => d.Role).WithMany(p => p.Accounts)
                 .HasForeignKey(d => d.RoleId)

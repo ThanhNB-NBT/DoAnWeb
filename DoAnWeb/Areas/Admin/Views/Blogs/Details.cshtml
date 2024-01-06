@@ -1,0 +1,102 @@
+﻿@model DoAnWeb.Models.Blog
+
+@{
+    ViewData["Title"] = "Chi tiết";
+}
+
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Chi tiết</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <h4>@Model.Title</h4>
+                        <div>
+                            <dl class="row">
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Tiêu đề:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Title)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Alias:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Alias)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Mô tả:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Description)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Nội dung:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Detail)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Hình ảnh
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Image)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Ngày tạo:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.CreatedDate)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Người tạo:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.CreatedBy)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.Tags)
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Tags)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Hiển thị:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0 fw-semibold border-bottom-0 fw-semibold border-bottom-0">
+                                    @if (Model.IsActive)
+                                    {
+                                        <span class="text-success">Có</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Không</span>
+                                    }
+                                </dd>
+                                @* <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.Account)
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Account.AccountId)
+                                </dd> *@
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Danh mục
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Category.CategoryId)
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model?.BlogId" class="btn btn-danger btn-edit m-1">Sửa</a> |
+                    <a asp-action="Index" type="button" class="btn btn-outline-primary m-1">Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

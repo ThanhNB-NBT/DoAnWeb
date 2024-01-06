@@ -1,8 +1,10 @@
 ﻿@model Blog
+@using DoAnWeb.Utilities;
 @{
 
     List<BlogComment> blogComments = ViewBag.blogComment;
     ViewData["Title"] = Model.Title.ToString();
+    string url = Functions.TitleSlugGeneration("Blog", Model.Title, Model.BlogId);
 }
 
 <main id="main">
@@ -26,68 +28,34 @@
     <!-- ======= Blog Single Section ======= -->
     <section id="blog" class="blog">
         <div class="container" data-aos="fade-up">
-
             <div class="row">
-
-                <div class="col-lg-8 entries">
-
+                <div class=" entries">
                     <article class="entry entry-single">
-
-                        <div class="entry-img">
-                            <img src="~/img/blog/blog.1.jpg" alt="" class="img-fluid">
-                        </div>
-
+                        
                         <h2 class="entry-title">
-                            <a href="blog-single.html">@Model.Title</a>
+                            @Html.Raw(Model.Title)
                         </h2>
-
                         <div class="entry-meta">
                             <ul>
-                                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">@Model.CreatedBy</a></li>
-                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time>@Model.CreatedDate</time></a></li>
+                                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="/@url">@Model.CreatedBy</a></li>
+                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="/@url"><time>@Model.CreatedDate</time></a></li>
                                 <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>@blogComments.Count()  Comments</li>
                             </ul>
                         </div>
 
                         <div class="entry-content">
-                            <p>
-                                @Model.Detail
-                            </p>
-                            <img src="~/img/blog/blog-inside-post.jpg" class="img-fluid" alt="">
-
-
-
+                            <p>@Html.Raw(Model.Description)</p>
+                            <p style="margin-top: 10px;">@Html.Raw(Model.Detail)</p>
                         </div>
 
                         <div class="entry-footer">
-                            <i class="bi bi-folder"></i>
-                            <ul class="cats">
-                                <li><a href="#"></a></li>
-                            </ul>
-
                             <i class="bi bi-tags"></i>
                             <ul class="tags">
                                 <li><a href="#">@Model.Tags</a></li>
-
                             </ul>
                         </div>
 
                     </article><!-- End blog entry -->
-
-                    <div class="blog-author d-flex align-items-center">
-                        <img src="~/img/blog/blog-author.jpg" class="rounded-circle float-left" alt="">
-                        <div>
-                            <h4>@Model.CreatedBy</h4>
-                            <div class="social-links">
-                                <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
-                                <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-                                <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-                            </div>
-                            <!--<p>
-                                Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
-                            </p>-->
-                        </div>
-                    </div><!-- End blog author bio -->
 
                     <div class="blog-comments">
 
@@ -96,7 +64,6 @@
                         {
                             <div id="comment-1" class="comment">
                                 <div class="d-flex">
-                                    <div class="comment-img"><img src="~/img/blog/comments-1.jpg" alt=""></div>
                                     <div>
                                         <h5><a href="">@cm.Name</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
                                         <time>@cm.CreatedDate</time>
@@ -142,7 +109,7 @@
 
                 </div><!-- End blog entries list -->
 
-                <div class="col-lg-4">
+                @* <div class="col-lg-4">
 
                     <div class="sidebar">
 
@@ -188,7 +155,7 @@
                             </ul>
                         </div><!-- End sidebar tags-->
 
-                    </div><!-- End sidebar -->
+                    </div><!-- End sidebar --> *@
 
                 </div><!-- End blog sidebar -->
 

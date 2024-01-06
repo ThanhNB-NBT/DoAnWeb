@@ -1,4 +1,4 @@
-/**
+﻿/**
 * Template Name: Moderna
 * Updated: Sep 18 2023 with Bootstrap v5.3.2
 * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
@@ -33,11 +33,19 @@ h6,
 .font-primary {
   font-family: "Roboto", sans-serif;
 }
-
-/*--------------------------------------------------------------
+img, svg {
+    vertical-align: middle !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: auto !important;
+    overflow-clip-margin: content-box !important;
+    overflow: clip !important;
+}
+    /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
-.back-to-top {
+    .back-to-top {
   position: fixed;
   visibility: hidden;
   opacity: 0;
@@ -1743,17 +1751,24 @@ section {
   font-weight: 500;
   font-size: 22px;
 }
+.blog .entry .entry-content img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: auto !important;
+}
+
 
 .blog .entry .entry-content blockquote::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background-color: #1e4356;
-  margin-top: 20px;
-  margin-bottom: 20px;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #1e4356;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .blog .entry .entry-footer {

@@ -20,6 +20,7 @@ public partial class Account
     public int? RoleId { get; set; }
 
     public bool IsActive { get; set; }
+    public string? Image { get; set; }
 
     public virtual ICollection<Blog> Blogs { get; set; } = new List<Blog>();
 
