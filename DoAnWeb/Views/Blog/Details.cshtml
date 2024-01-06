@@ -64,11 +64,12 @@
                         {
                             <div id="comment-1" class="comment">
                                 <div class="d-flex">
+                                    <div class="comment-img"><img src="~/admin/assets/images/profile/user-1.jpg" alt=""></div>
                                     <div>
                                         <h5><a href="">@cm.Name</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
                                         <time>@cm.CreatedDate</time>
                                         <p>
-                                            @cm.Detail
+                                            @Html.Raw(cm.Detail)
                                         </p>
                                     </div>
                                 </div>
@@ -78,28 +79,28 @@
                         }
 
                         <div class="reply-form">
-                            <h4>Leave a Reply</h4>
-                            <p>Your email address will not be published. Required fields are marked * </p>
-                            <form action="">
+                            <h4>Để lại câu bình luận</h4>
+                            <p>Email của bạn sẽ không được hiển thị công khai. Các trường bắt buộc được đánh dấu * </p>
+                            <form id="commentFrm" action="" method="post">
                                 <div class="row">
                                     <div class="col-md-6 form-group">
-                                        <input name="name" type="text" class="form-control" placeholder="Your Name*">
+                                        <input name="Name" id="name" type="text" class="form-control" placeholder="Họ và Tên*">
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        <input name="email" type="text" class="form-control" placeholder="Your Email*">
+                                        <input name="Email" id="email" type="text" class="form-control" placeholder="Email*">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col form-group">
-                                        <input name="website" type="text" class="form-control" placeholder="Your Website">
+                                        <input name="Phone" id="phone" type="text" class="form-control" placeholder="Điện thoại">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col form-group">
-                                        <textarea name="comment" class="form-control" placeholder="Your Comment*"></textarea>
+                                        <textarea name="Detail" id="detail" class="form-control" placeholder="Bình luận*"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Bình luận</button>
+                                <button id="btnCommentSubmit" type="submit" class="btn btn-primary">Bình luận</button>
 
                             </form>
 
@@ -108,61 +109,17 @@
                     </div><!-- End blog comments -->
 
                 </div><!-- End blog entries list -->
-
-                @* <div class="col-lg-4">
-
-                    <div class="sidebar">
-
-                        <h3 class="sidebar-title">Tìm kiếm</h3>
-                        <div class="sidebar-item search-form">
-                            <form action="">
-                                <input type="text">
-                                <button type="submit"><i class="bi bi-search"></i></button>
-                            </form>
-                        </div><!-- End sidebar search formn-->
-
-                        <h3 class="sidebar-title">Danh mục</h3>
-                        <div class="sidebar-item categories">
-                            <ul>
-                                <li><a href="#">General <span>(25)</span></a></li>
-                                <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                                <li><a href="#">Travel <span>(5)</span></a></li>
-                                <li><a href="#">Design <span>(22)</span></a></li>
-                                <li><a href="#">Creative <span>(8)</span></a></li>
-                                <li><a href="#">Educaion <span>(14)</span></a></li>
-                            </ul>
-                        </div><!-- End sidebar categories-->
-
-                        <h3 class="sidebar-title">Recent Posts</h3>
-                        @await Component.InvokeAsync("RecentPost")
-                        <!-- End sidebar recent posts-->
-
-                        <h3 class="sidebar-title">Tags</h3>
-                        <div class="sidebar-item tags">
-                            <ul>
-
-
-                                <li><a href="#">IT</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Mac</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Office</a></li>
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Studio</a></li>
-                                <li><a href="#">Smart</a></li>
-                                <li><a href="#">Tips</a></li>
-                                <li><a href="#">Marketing</a></li>
-                            </ul>
-                        </div><!-- End sidebar tags-->
-
-                    </div><!-- End sidebar --> *@
-
-                </div><!-- End blog sidebar -->
-
             </div>
-
         </div>
     </section><!-- End Blog Single Section -->
-
 </main>
+
+@section Script {
+    <script src="~/assets/js/comment.js"></script>
+    @{
+        var summerNote = new DoAnWeb.Areas.Admin.Models.SummerNote("#detail");
+    }
+    <partial name="/Areas/Admin/Views/Shared/_SummerNote.cshtml" model="summerNote" />
+}
+
 

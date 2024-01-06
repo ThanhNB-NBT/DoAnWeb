@@ -1,6 +1,34 @@
 ﻿@using DoAnWeb.Models;
 @model IList<AdminMenu>
 
+<style>
+    .submenu {
+        display: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    .nav-small-cap.active .submenu {
+        display: block;
+        max-height: 1000px;
+    }
+
+    .nav-small-cap .nav-small-cap-icon {
+        display: inline-block;
+        float: right;
+    }
+
+    .nav-small-cap.active .nav-small-cap-icon:before {
+        content: '\002B'; /* Dấu - */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .nav-small-cap .nav-small-cap-icon:before {
+        content: '\002D'; /* Dấu + */
+        transform: rotate(45deg); /* Quay biểu tượng khi được click */
+    }
+</style>
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
     <div>
@@ -20,20 +48,25 @@
                     var Pid = Item.MenuAdminId;
                     var sMenu = Model.Where(p => p.ParentLevels == Pid).OrderBy(p => p.ItemOrder).ToList();
 
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <a href="/@Item.AreaName/@Item.ControllerName/@Item.ActionName" class="hide-menu">@Item.ItemName</a>
-                    </li>
-                    <li class="sidebar-item">
-                        @foreach (var sMn in sMenu)
-                        {
-                            <a class="sidebar-link" href="/@sMn.AreaName/@sMn.ControllerName/@sMn.ActionName" aria-expanded="false">
-                                <span>
-                                    <i class="@sMn.Icon"></i>
-                                </span>
-                                <span class="hide-menu">@sMn.ItemName</span>
-                            </a>
-                        }
+                    <li class="nav-small-cap" style="cursor: pointer;padding-right: 3px;">
+                        
+                        <p href="#" class="hide-menu">@Item.ItemName
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        </p>
+                        
+                        <ul class="submenu">
+                            @foreach (var sMn in sMenu)
+                            {
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="/@sMn.AreaName/@sMn.ControllerName/@sMn.ActionName">
+                                        <span>
+                                            <i class="@sMn.Icon"></i>
+                                        </span>
+                                        <span class="hide-menu fw-semibold">@sMn.ItemName</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
                     </li>
                 }
             </ul>
@@ -44,3 +77,10 @@
     <!-- End Sidebar scroll-->
 </aside>
 
+@* <script>
+    $(document).ready(function () {
+        $('.nav-small-cap').click(function () {
+            $(this).toggleClass('active');
+        });
+    });
+</script> *@

@@ -18,22 +18,12 @@ namespace DoAnWeb.Controllers
         // GET: BlogController
         public ActionResult Index()
         {
-            var blogs = _context.Blogs.ToList();
-
-            // Lặp qua từng bài blog và đếm số lượng comment cho mỗi blog
-            var blogsWithCommentCount = blogs.Select(blog => new
-            {
-                Blog = blog,
-                CommentCount = _context.BlogComments.Count(comment => comment.BlogId == blog.BlogId)
-            }).ToList();
-
-            ViewBag.BlogsWithCommentCount = blogsWithCommentCount;
             return View();
         }
 
         // GET: BlogController/Details/5
         [Route("/blog-{slug}-{id:}.html", Name ="blogDetail")]
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, BlogComment blogComment)
         {
             if (id == null)
             {
@@ -44,6 +34,11 @@ namespace DoAnWeb.Controllers
             {
                 return NotFound();
             }
+            blogComment.IsActive = true;
+            blogComment.CreatedDate = DateTime.Now;
+            blogComment.BlogId = id;
+            _context.BlogComments.Add(blogComment);
+            _context.SaveChanges();
             ViewBag.blogComment = _context.BlogComments.Where(i => i.BlogId == id).ToList();
             return View(blogdetails);
         }
