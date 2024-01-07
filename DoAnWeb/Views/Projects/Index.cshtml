@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Dự án";
 }
 
@@ -29,18 +28,25 @@
         <!-- ======= Portfolio Section ======= -->
         <section class="portfolio">
             <div class="container">
-
-                <div class="row">
+                <div id="project-list" class="row">
                     <div class="col-lg-12">
+                        <ul id="portfolio-flters">
+                            <li data-filter="*" class="filter-active">All</li>
+                            @foreach (var category in ViewBag.Categories)
+                            {
+                                <li data-filter=".filter-@category.CategoryPid" class="category-item" id="category-@category.CategoryPid">@category.Name</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                    @* <div class="col-lg-12">
                         <ul id="portfolio-flters">
                             <li data-filter="*" class="filter-active">All</li>
                             <li data-filter=".filter-app">App</li>
                             <li data-filter=".filter-card">Card</li>
                             <li data-filter=".filter-web">Web</li>
                         </ul>
-                    </div>
-                </div>
-
+                    </div> *@
                 <div class="row portfolio-container" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
                     @await Component.InvokeAsync("ProjectView")
                 </div>
@@ -50,4 +56,47 @@
 
     </main><!-- End #main -->
 </body>
+
 </html>
+@section Script{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var categoryItems = document.getElementsByClassName("category-item");
+
+            for (var i = 0; i < categoryItems.length; i++) {
+                categoryItems[i].addEventListener("click", function () {
+                    var categoryId = this.id.replace("category-", "");
+                    filterProjects(categoryId);
+                });
+            }
+        });
+
+        function filterProjects(categoryId) {
+            console.log("Selected CategoryId: ", categoryId);
+            // Ẩn tất cả dự án
+            var allProjects = document.getElementsByClassName("portfolio-wrap");
+            for (var i = 0; i < allProjects.length; i++) {
+                allProjects[i].style.display = "none";
+            }
+
+            // Hiển thị dự án theo danh mục được chọn
+            var filteredProjects = document.getElementsByClassName("filter-" + categoryId);
+            for (var i = 0; i < filteredProjects.length; i++) {
+                filteredProjects[i].style.display = "block";
+            }
+        }
+
+
+
+        // // Thêm sự kiện cho từng danh mục
+        // var categoryItems = document.getElementsByClassName("category-item");
+        // for (var i = 0; i < categoryItems.length; i++) {
+        //     categoryItems[i].addEventListener("click", function () {
+        //         var categoryId = this.id.replace("category-", "");
+        //         showProjects(categoryId);
+        //     });
+        // }
+    </script>
+
+}
+

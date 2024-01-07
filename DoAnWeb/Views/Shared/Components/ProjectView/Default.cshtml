@@ -9,7 +9,7 @@
 @foreach (var pr in Model)
 {
     string url = Functions.TitleSlugGeneration("Projects", pr.ProjectName, pr.ProjectId);
-    <div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
+    <div class="col-lg-4 col-md-6 portfolio-wrap filter-@pr.CategoryPid">
         <div class="portfolio-item">
             <img src="@pr.Image" class="img-fluid" alt="">
             <div class="portfolio-info">
