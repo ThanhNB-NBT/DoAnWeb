@@ -28,8 +28,10 @@ namespace DoAnWeb.Areas.Admin.Controllers
 
             // Truy vấn Projects với phân trang
             var pagedList = await _context.Blogs
-                .Include(p => p.Category).Include(p => p.Account) // Kết hợp bảng có khóa ngoại
-                .ToPagedListAsync(pageNumber, pageSize);
+                            .Include(p => p.Category)
+                            .Include(p => p.Account)
+                            .OrderByDescending(p => p.CreatedDate) // Sắp xếp theo thời gian giảm dần
+                            .ToPagedListAsync(pageNumber, pageSize);
 
             return View(pagedList);
         }

@@ -7,41 +7,6 @@
     var successMessage = TempData["SuccessMessage"] as string;
     var errorMessage = TempData["ErrorMessage"] as string;
 }
-<style>
-    .pagination-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .pagination-item {
-        width: 30px; /* Độ rộng của ô vuông */
-        height: 30px; /* Chiều cao của ô vuông */
-        margin-right: 5px; /* Khoảng cách giữa các ô vuông */
-        color: #007bff;
-        text-align: center;
-        line-height: 30px; /* Đưa chữ về giữa ô vuông */
-        cursor: pointer;
-        border-radius: 3px;
-        display: inline-block; /* Hiển thị trên cùng một dòng */
-        transition: background-color 0.3s;
-    }
-
-    .pagination-item:hover {
-        background-color: #007bff;
-            color: #ffffff !important;
-    }
-
-    .pagination-item.active {
-        background-color: #007bff;
-        color: #ffffff;
-    }
-
-    .pagination-item:last-child {
-        margin-right: 0;
-    }
-
-</style>
 
 <div class="container-fluid">
     <div class="row">
@@ -66,9 +31,6 @@
                     <p>
                         <a asp-action="Create" class="btn btn-primary mb-3">Thêm mới</a>
                     </p>
-                    <div id="deleteAlert" class="alert" role="alert" style="display: none;">
-                        <!-- Nội dung của thông báo sẽ được cập nhật bằng mã JavaScript -->
-                    </div>
                     <div class="table-responsive">
                         <table class="table text-nowrap mb-0 align-middle">
                             <thead class="text-dark fs-4">
@@ -160,8 +122,8 @@
                                 }
                             </tbody>
                         </table>
-                        <div class="pagination-container">
-                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded,LiElementClasses = new[] { "pagination-item" }})
+                        <div class="pagination">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, LiElementClasses = new[] { "page-link" } })
                         </div>
                     </div>
                 </div>

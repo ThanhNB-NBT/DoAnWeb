@@ -1,6 +1,11 @@
-﻿@model IList<Blog>
+﻿@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@using DoAnWeb.Utilities;
+@model IPagedList<Blog>
 @{
     ViewData["Title"] = "Blog";
+    List<BlogComment> blogComment = ViewBag.blogComment;
 }
 <html>
 <head>
@@ -26,16 +31,45 @@
         <div class="container" data-aos="fade-up">
             <div class="row">
                 <div class="col-lg-8 entries">
-                @await Component.InvokeAsync("BlogView")
+                    @foreach (var bg in Model)
+                    {
+                        string url = Functions.TitleSlugGeneration("Blog", bg.Title, bg.BlogId);
+                        var listComment = blogComment.Where(i => i.BlogId == bg.BlogId);
+                        <article class="entry">
+
+                            <div class="entry-img">
+                                <img src="@bg.Image" alt="" class="img-fluid">
+                            </div>
+                            <h2 class="entry-title">
+                                <a href="/@url">@bg.Title</a>
+                            </h2>
+                            <div class="entry-meta">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="/@url">@bg.CreatedBy</a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="/@url"><time>@bg.CreatedDate</time></a></li>
+                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="/@url">@listComment.Count() Comments</a></li>
+                                </ul>
+                            </div>
+                            <div class="entry-content">
+                                <p>
+                                    @bg.Description
+                                </p>
+                                <div class="read-more">
+                                    <a href="/@url">Xem thêm</a>
+                                </div>
+                            </div>
+                        </article>
+                    }
 
                     <div class="blog-pagination">
-                        <ul class="justify-content-center">
-                            <li class="active" "><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                        </ul>
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions
+                   {
+                       LiElementClasses = new[] { "active" },
+                       PageClasses = new[] { "page-link" },
+                       ContainerDivClasses = new[] { "pagination" },
+                       UlElementClasses = new[] { "justify-content-center" },
+                   })
                     </div>
-
                 </div><!-- End blog entries list -->
 
                 <div class="col-lg-4">
@@ -44,9 +78,12 @@
 
                         <h3 class="sidebar-title">Tìm kiếm</h3>
                         <div class="sidebar-item search-form">
-                            <form action="">
-                                <input type="text">
-                                <button type="submit"><i class="bi bi-search"></i></button>
+                            <form role="search" method="get" action="@Url.Action("Index", "Blog")">
+                                <div class="input-group">
+                                    <input name="searchString" class="form-control" placeholder="Enter your keywords..." value="@ViewBag.Keyword" type="text">
+                                    <button type="submit" class="bi bi-search"></button>
+
+                                </div>
                             </form>
                         </div><!-- End sidebar search formn-->
 

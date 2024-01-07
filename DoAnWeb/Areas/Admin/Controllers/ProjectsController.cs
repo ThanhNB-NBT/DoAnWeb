@@ -28,7 +28,8 @@ namespace DoAnWeb.Areas.Admin.Controllers
 
             // Truy vấn Projects với phân trang
             var pagedList = await _context.Projects
-                .Include(p => p.CategoryP) // Kết hợp bảng có khóa ngoại
+                .Include(p => p.CategoryP)
+                .OrderByDescending(p => p.CreatedDate)
                 .ToPagedListAsync(pageNumber, pageSize);
 
             return View(pagedList);

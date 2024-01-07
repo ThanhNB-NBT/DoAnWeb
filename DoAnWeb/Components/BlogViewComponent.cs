@@ -14,10 +14,14 @@ namespace DoAnWeb.Components
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var listofBlog = (from b in _context.Blogs
-                              where (b.IsActive == true)
-                              select b).ToList();
-            return await Task.FromResult((IViewComponentResult)View("Default", listofBlog));
+            var items = await _context.Blogs
+                .Where(m => m.IsActive)
+                .OrderByDescending(i => i.BlogId)
+                .ToListAsync();
+
+            ViewBag.blogComment = _context.BlogComments.Where(m => m.IsActive).ToList();
+
+            return View(items);
         }
     }
 }

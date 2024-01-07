@@ -1,15 +1,15 @@
 ﻿@using DoAnWeb.Utilities;
 @using DoAnWeb.Models;
 @model IEnumerable<Blog>
-@{
-    
-}
 
-<!-- ======= Blog Section ======= -->
+
+@{
+    List<BlogComment> blogComment = ViewBag.blogComment;
+}
 @foreach (var bg in Model)
 {
     string url = Functions.TitleSlugGeneration("Blog", bg.Title, bg.BlogId);
-
+    var listComment = blogComment.Where(i => i.BlogId == bg.BlogId);
     <article class="entry">
 
         <div class="entry-img">
@@ -22,6 +22,7 @@
             <ul>
                 <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="/@url">@bg.CreatedBy</a></li>
                 <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="/@url"><time>@bg.CreatedDate</time></a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="/@url">@listComment.Count() Comments</a></li>
             </ul>
         </div>
         <div class="entry-content">
@@ -34,4 +35,7 @@
         </div>
     </article>
 }
+
 <!-- End Blog Section -->
+
+<!-- ======= Blog Section ======= -->

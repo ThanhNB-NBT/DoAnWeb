@@ -1,6 +1,9 @@
 ﻿using DoAnWeb.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using X.PagedList;
+using System.Configuration;
 
 namespace DoAnWeb.Controllers
 {
@@ -16,10 +19,28 @@ namespace DoAnWeb.Controllers
             _context = context;
         }
         // GET: BlogController
-        public ActionResult Index()
+        public IActionResult Index(int? page, string searchString, int? id)
         {
-            return View();
+            ViewBag.Keyword = searchString;
+            int pageNumber = (page ?? 1);
+            int pageSize = 4; // Set the desired number of items per page
+
+            var blogsQuery = _context.Blogs.Where(i => i.IsActive);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                blogsQuery = blogsQuery.Where(b => b.Title.ToLower().Contains(searchString));
+            }
+
+            // Sắp xếp theo BlogId giảm dần
+            var blogs = blogsQuery.OrderByDescending(i => i.BlogId).ToPagedList(pageNumber, pageSize);
+
+            ViewBag.blogComment = _context.BlogComments.Where(i => i.BlogId == id).ToList();
+
+            return View(blogs);
         }
+
 
         // GET: BlogController/Details/5
         [Route("/blog-{slug}-{id:}.html", Name ="blogDetail")]
