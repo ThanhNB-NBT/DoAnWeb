@@ -1,4 +1,4 @@
-using DoAnWeb.Models;
+﻿using DoAnWeb.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

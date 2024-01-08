@@ -2,6 +2,7 @@
 using elFinder.NetCore;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using DoAnWeb.Utilities;
 
 namespace DoAnWeb.Areas.Admin.Controllers
 {
@@ -12,6 +13,8 @@ namespace DoAnWeb.Areas.Admin.Controllers
         
         public IActionResult Index()
         {
+            if (!Functions.IsLogin())
+                return RedirectToAction("Index", "Login");
             return View();
         }
         //readonly IWebHostEnvironment _env;

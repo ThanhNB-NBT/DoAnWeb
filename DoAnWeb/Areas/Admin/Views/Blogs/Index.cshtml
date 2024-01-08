@@ -22,7 +22,7 @@
         <div class="d-flex align-items-stretch">
             <div class="card w-100">
                 <div class="card-body p-4">
-                    <h5 class="card-title fw-semibold mb-4">Quản lý Dự án</h5>
+                    <h5 class="card-title fw-semibold mb-4">Quản lý Blog</h5>
                     @if (!string.IsNullOrEmpty(successMessage))
                     {
                         <div id="successAlert" class="alert alert-success">
@@ -113,7 +113,16 @@
                                             <h6 class="fw-semibold mb-0 truncate-text">@item.CreatedBy</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">@Html.CheckBox("true", @item.IsActive)</h6>
+                                            <h6 class="fw-semibold mb-0">
+                                                    @if (item.IsActive)
+                                                    {
+                                                    <span class="text-success">Có</span>
+                                                    }
+                                                    else
+                                                    {
+                                                    <span class="text-danger">Không</span>
+                                                    }
+                                            </h6>
                                         </td>
                                         <td class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">@item.Category.Name</h6>

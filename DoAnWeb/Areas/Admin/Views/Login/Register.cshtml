@@ -1,0 +1,69 @@
+﻿@model DoAnWeb.Models.Account
+@{
+    Layout = null;
+    var successMessage = TempData["SuccessMessage"] as string;
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="~/admin/assets/images/logos/favicon.png" />
+    <link rel="stylesheet" href="~/admin/assets/css/styles.min.css" />
+</head>
+<body>
+    <div class="page-wrapper" id="main-wrapper">
+        <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center justify-content-center w-100">
+                <div class="row justify-content-center w-100">
+                    <div class="col-md-8 col-lg-6 col-xxl-3">
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                                    <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                                </a>
+                                <p class="text-center">Tạo tài khoản cho riêng bạn </p>
+                                <!-- Form contents... -->
+                                <form asp-controller="Login" asp-action="Register" method="post">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Tài khoản</label>
+                                        <input type="text" class="form-control" id="username" name="UserName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="Email" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="password" class="form-label">Mật khẩu</label>
+                                        <input type="password" class="form-control" id="password" name="Password" required>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(successMessage))
+                                    {
+                                        <div id="successAlert" class="alert alert-success">
+                                            @successMessage
+                                        </div>
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(errorMessage))
+                                    {
+                                        <div id="errorAlert" class="alert alert-danger">
+                                            @errorMessage
+                                        </div>
+                                    }
+                                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Đăng ký</button>
+                                </form>
+                                <!-- End form contents... -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

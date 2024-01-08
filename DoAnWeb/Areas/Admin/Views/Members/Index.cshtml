@@ -96,7 +96,16 @@
                                             <h6 class="fw-semibold mb-0 truncate-text">@item.Message</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">@Html.CheckBox("true", @item.IsActive)</h6>
+                                            <h6 class="fw-semibold mb-0">
+                                                @if (item.IsActive)
+                                                {
+                                                    <span class="text-success">Có</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">Không</span>
+                                                }
+                                            </h6>
                                         </td>
                                         <td class="border-bottom-0">
                                             <a asp-action="Edit" asp-route-id="@item.MemberId" class="btn btn-danger btn-sm">Sửa</a> |

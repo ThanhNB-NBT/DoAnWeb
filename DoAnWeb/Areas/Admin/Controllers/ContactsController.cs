@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAnWeb.Models;
 using X.PagedList;
+using DoAnWeb.Utilities;
 
 namespace DoAnWeb.Areas.Admin.Controllers
 {
@@ -23,6 +24,8 @@ namespace DoAnWeb.Areas.Admin.Controllers
         // GET: Admin/Contacts
         public async Task<IActionResult> Index(int? page)
         {
+            if (!Functions.IsLogin())
+                return RedirectToAction("Index", "Login");
             int pageSize = 6;
             int pageNumber = (page ?? 1);
             var contacts = await _context.Contacts

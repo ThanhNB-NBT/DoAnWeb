@@ -61,7 +61,8 @@ public partial class DoAnWebContext : DbContext
             entity.Property(e => e.AccountId).HasColumnName("AccountID");
             entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.FullName).HasMaxLength(50);
-            entity.Property(e => e.Password).HasMaxLength(50);
+            entity.Property(e => e.Password).HasColumnType("nvarchar(MAX)")
+                                            .IsRequired();
             entity.Property(e => e.Phone).HasMaxLength(50);
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.UserName).HasMaxLength(50);
