@@ -68,7 +68,10 @@
                     @foreach (var bg in Model)
                     {
                         string url = Functions.TitleSlugGeneration("Blog", bg.Title, bg.BlogId);
-                        var listComment = blogComment.Where(i => i.BlogId == bg.BlogId);
+                        var listComment = ViewBag.blogComment as List<BlogComment>;
+                        var categoryId = ViewBag.SelectedCategoryId as int?;
+                        if(!categoryId.HasValue || bg.CategoryId == categoryId)
+                        {
                         <article class="entry">
 
                             <div class="entry-img">
@@ -81,7 +84,10 @@
                                 <ul>
                                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="/@url">@bg.CreatedBy</a></li>
                                     <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="/@url"><time>@bg.CreatedDate</time></a></li>
-                                    <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="/@url">@listComment.Count() Comments</a></li>
+                                    @if (listComment != null && listComment.Any())
+                                    {
+                                        <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="/@url">@listComment.Count() Comments</a></li>
+                                    }
                                 </ul>
                             </div>
                             <div class="entry-content">
@@ -93,6 +99,8 @@
                                 </div>
                             </div>
                         </article>
+                        }
+                        
                     }
 
                     <div class=".pagination-container">
@@ -112,28 +120,33 @@
                             </form>
                         </div><!-- End sidebar search formn-->
 
-                        @* <h3 class="sidebar-title">Danh mục</h3>
+                        <h3 class="sidebar-title">Danh mục</h3>
                         <div class="sidebar-item categories">
                             <ul>
-                                <li><a href="#">General <span>(25)</span></a></li>
-                                <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                                <li><a href="#">Travel <span>(5)</span></a></li>
-                                <li><a href="#">Design <span>(22)</span></a></li>
-                                <li><a href="#">Creative <span>(8)</span></a></li>
-                                <li><a href="#">Educaion <span>(14)</span></a></li>
+                                @foreach (var category in ViewBag.CategoriesWithCount)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", new { categoryId = category.Category.CategoryId })">
+                                            @category.Category.Name <span>(@category.BlogCount)</span>
+                                        </a>
+                                    </li>
+                                }
                             </ul>
-                        </div><!-- End sidebar categories--> *@
+                        </div><!-- End sidebar categories-->
 
                         <h3 class="sidebar-title">Recent Posts</h3>
                         @await Component.InvokeAsync("RecentPost")
                         <!-- End sidebar recent posts-->
-
                         <h3 class="sidebar-title">Tags</h3>
                         <div class="sidebar-item tags">
                             <ul>
-                                @foreach(var tg in Model)
+                                @foreach (var tag in ViewBag.Tags)
                                 {
-                                    <li><a href="#">@tg.Tags</a></li>
+                                    <li>
+                                        <a href="@Url.Action("Index", new { tag = tag })" class="tag-link">
+                                            @tag
+                                        </a>
+                                    </li>
                                 }
                             </ul>
                         </div><!-- End sidebar tags-->

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 using System.Configuration;
+using Azure;
+using Newtonsoft.Json;
 
 namespace DoAnWeb.Controllers
 {
@@ -19,11 +21,11 @@ namespace DoAnWeb.Controllers
             _context = context;
         }
         // GET: BlogController
-        public IActionResult Index(int? page, string searchString, int? id)
+        public IActionResult Index(int? page, string searchString, int? id, int? categoryId, string tag)
         {
             ViewBag.Keyword = searchString;
             int pageNumber = (page ?? 1);
-            int pageSize = 4; // Set the desired number of items per page
+            int pageSize = 3; //số lượng bài viết trong 1 trang
 
             var blogsQuery = _context.Blogs.Where(i => i.IsActive);
 
@@ -32,9 +34,37 @@ namespace DoAnWeb.Controllers
                 searchString = searchString.ToLower();
                 blogsQuery = blogsQuery.Where(b => b.Title.ToLower().Contains(searchString));
             }
-
+            if (categoryId.HasValue)
+            {
+                blogsQuery = blogsQuery.Where(b => b.CategoryId == categoryId);
+            }
+            if (!string.IsNullOrEmpty(tag))
+            {
+                blogsQuery = blogsQuery.Where(b => b.Tags.Contains(tag));
+            }
             // Sắp xếp theo BlogId giảm dần
-            var blogs = blogsQuery.OrderByDescending(i => i.BlogId).ToPagedList(pageNumber, pageSize);
+            var blogs = blogsQuery.OrderByDescending(i => i.CreatedDate).ToPagedList(pageNumber, pageSize);
+            var categoriesWithCount = _context.CategoryBlogs
+                                 .Where(c => c.IsActive)
+                                 .Select(c => new
+                                 {
+                                     Category = c,
+                                     BlogCount = c.Blogs.Count(b => b.IsActive)
+                                 })
+                                 .ToList();
+
+            ViewBag.CategoriesWithCount = categoriesWithCount;
+
+            var tags = _context.Blogs
+                        .Where(b => b.IsActive && b.Tags != null)
+                        .AsEnumerable() // Chuyển đổi kết quả truy vấn thành một tập hợp
+                        .Select(b => b.Tags.Split(new char[] { ',' }))
+                        .SelectMany(tagsArray => tagsArray)
+                        .Distinct()
+                        .ToList();
+
+
+            ViewBag.Tags = tags;
 
             ViewBag.blogComment = _context.BlogComments.Where(i => i.BlogId == id).ToList();
 
