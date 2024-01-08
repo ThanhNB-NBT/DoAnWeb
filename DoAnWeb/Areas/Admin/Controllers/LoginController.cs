@@ -47,6 +47,7 @@ namespace DoAnWeb.Areas.Admin.Controllers
                         //_context.SaveChanges();
                         Functions._AccountId = user.AccountId;
                         Functions._UserName = user.UserName;
+                        Functions._FullName = user.FullName;
                         Functions._Email = user.Email;
                     }
                 }
@@ -96,7 +97,8 @@ namespace DoAnWeb.Areas.Admin.Controllers
                     {
                         UserName = model.UserName,
                         Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
-
+                        FullName = model.FullName,
+                        Phone = model.Phone,
                         Email = model.Email,
                         RoleId = 1,
                         IsActive = true

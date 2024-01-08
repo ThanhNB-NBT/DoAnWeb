@@ -7,9 +7,12 @@ namespace DoAnWeb.Utilities
     {
         public static int _AccountId = 0;
         public static string _UserName = string.Empty;
+        public static string _FullName = string.Empty;
+        public static int _Phone = 0;
         public static string _Email = string.Empty;
         public static string _Message = string.Empty;
         public static string _MessageEmail = string.Empty;
+
 
         public static string TitleSlugGeneration(string type, string title, int id)
         {

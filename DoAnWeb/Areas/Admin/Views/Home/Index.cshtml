@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
 @{
     ViewData["Title"] = "Admin";
 }
@@ -160,7 +160,10 @@
             </div>
         </div>
         <div class="col-lg-8 d-flex align-items-stretch">
-            <div class="card w-100">
+            @{
+                // await Html.RenderActionAsync("Index", "Blogs");
+            }
+            @* <div class="card w-100">
                 <div class="card-body p-4">
                     <h5 class="card-title fw-semibold mb-4">Recent Transactions</h5>
                     <div class="table-responsive">
@@ -261,7 +264,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> *@
         </div>
     </div>
     <div class="row">

@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using DoAnWeb.Models;
 using X.PagedList;
 using DoAnWeb.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DoAnWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AllowAnonymous]
     public class BlogsController : Controller
     {
         private readonly DoAnWebContext _context;
@@ -20,7 +22,7 @@ namespace DoAnWeb.Areas.Admin.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Admin/Blogs
         public async Task<IActionResult> Index(int? page)
         {

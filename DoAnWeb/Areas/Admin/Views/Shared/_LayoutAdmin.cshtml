@@ -1,6 +1,5 @@
 ﻿@using DoAnWeb.Utilities;
 
-
 <!doctype html>
 <html lang="en">
 
@@ -13,10 +12,11 @@
 
     <script src="~/admin/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="~/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/admin/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="~/admin/assets/js/sidebarmenu.js"></script>
     <script src="~/admin/assets/js/app.min.js"></script>
     <script src="~/admin/assets/libs/simplebar/dist/simplebar.js"></script>
-
+    <script src="~/admin/assets/js/dashboard.js"></script>
 </head>
 
 <body>
@@ -41,25 +41,28 @@
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                             <li class="nav-item dropdown">
+                                
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                                    aria-expanded="false">
                                     <img src="~/admin/assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                                    <p class="mb-0 fs-6 fw-semibold" style="margin-left: 5px;">@Functions._FullName</p>
                                 </a>
+
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-user fs-6"></i>
-                                            <p class="mb-0 fs-3">@Functions._UserName</p>
+                                        <a asp-action="Details" asp-controller="Accounts" asp-route-id="@Functions._AccountId" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <i class="ti ti-user fs-5"></i>
+                                            <p class="mb-0 fs-6 fw-semi">@Functions._UserName</p>
                                         </a>
-                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        @* <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-mail fs-6"></i>
                                             <p class="mb-0 fs-3">My Account</p>
                                         </a>
                                         <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-list-check fs-6"></i>
                                             <p class="mb-0 fs-3">My Task</p>
-                                        </a>
-                                        <a href="/Admin/Login/Logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                                        </a> *@
+                                        <a href="/Admin/Login/Logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Đăng xuất</a>
                                     </div>
                                 </div>
                             </li>

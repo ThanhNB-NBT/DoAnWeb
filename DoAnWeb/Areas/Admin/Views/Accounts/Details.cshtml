@@ -1,0 +1,85 @@
+﻿@model DoAnWeb.Models.Account
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Thông tin cá nhân</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <h4>@Model.FullName</h4>
+                        <div>
+                            <dl class="row">
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Tài khoản:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.UserName)
+                                </dd>
+                                @* <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    @Html.DisplayNameFor(model => model.Password)
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Password)
+                                </dd> *@
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Họ và tên:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.FullName)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Điện thoại:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Phone)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Email:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Email)
+                                </dd>
+                                @* <dt class="col-sm-2 fw-semibold border-bottom-0 fw-semibold border-bottom-0">
+                                    Hình ảnh:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Image)
+                                </dd> *@
+                                <dt class="col-sm-2 fw-semibold border-bottom-0">
+                                    Vai trò:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0">
+                                    @Html.DisplayFor(model => model.Role.RoleName)
+                                </dd>
+                                <dt class="col-sm-2 fw-semibold border-bottom-0 fw-semibold border-bottom-0">
+                                    Hiển thị:
+                                </dt>
+                                <dd class="col-sm-10 fw-semibold border-bottom-0 fw-semibold border-bottom-0 fw-semibold border-bottom-0 fw-semibold border-bottom-0">
+                                    @if (Model.IsActive)
+                                    {
+                                        <span class="text-success">Hoạt động</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Khóa</span>
+                                    }
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    @* <a asp-action="Edit" asp-route-id="@Model?.AccountId" class="btn btn-danger btn-edit m-1">Sửa</a> | *@
+                    <a asp-action="Index" asp-controller="Home" type="button" class="btn btn-outline-primary m-1">Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
