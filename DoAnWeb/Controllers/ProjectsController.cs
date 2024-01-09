@@ -21,10 +21,10 @@ namespace DoAnWeb.Controllers
         public IActionResult Index()
         {
             var projects = _context.Projects
-        .Include(p => p.CategoryP)
-        .Where(m => m.IsActive)
-        .OrderByDescending(i => i.ProjectId)
-        .ToList();
+                            .Include(p => p.CategoryP)
+                            .Where(m => m.IsActive)
+                            .OrderByDescending(i => i.ProjectId)
+                            .ToList();
 
             var categories = _context.CategoryProjects.ToList();
 
@@ -45,7 +45,8 @@ namespace DoAnWeb.Controllers
             {
                 return NotFound();
             }
-           
+            var categories = _context.CategoryProjects.ToList();
+            ViewBag.Categories = categories;
             return View(Details);
         }
     }

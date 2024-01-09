@@ -113,16 +113,16 @@
                                             <h6 class="fw-semibold mb-0 truncate-text">@item.CreatedBy</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">
-                                                    @if (item.IsActive)
+                                            <div class="d-flex align-items-center gap-2">
+                                                @if (item.IsActive)
                                                     {
-                                                    <span class="text-success">Có</span>
+                                                    <span class="badge bg-secondary rounded-3 fw-semibold">Có</span>
                                                     }
-                                                    else
+                                                else
                                                     {
-                                                    <span class="text-danger">Không</span>
+                                                    <span class="badge bg-danger rounded-3 fw-semibold">Không</span>
                                                     }
-                                            </h6>
+                                            </div>
                                         </td>
                                         <td class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0">@item.Category.Name</h6>

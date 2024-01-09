@@ -1,8 +1,49 @@
-﻿
+﻿@using DoAnWeb.Models;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@model IPagedList<Member>
 @{
     ViewData["Title"] = "Thành viên";
 }
+<style>
+    .img-member {
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+    }
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
 
+    .pagination-item {
+        width: 30px; /* Độ rộng của ô vuông */
+        height: 30px; /* Chiều cao của ô vuông */
+        margin-right: 5px; /* Khoảng cách giữa các ô vuông */
+        color: #007bff;
+        text-align: center;
+        line-height: 30px; /* Đưa chữ về giữa ô vuông */
+        cursor: pointer;
+        border-radius: 3px;
+        display: inline-block; /* Hiển thị trên cùng một dòng */
+        transition: background-color 0.3s;
+    }
+
+        .pagination-item:hover {
+            background-color: #007bff;
+            color: #ffffff !important;
+        }
+
+        .pagination-item.active {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .pagination-item:last-child {
+            margin-right: 0;
+        }
+</style>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -24,7 +65,37 @@
 
             </div>
         </section><!-- End Our Team Section -->
-        @await Component.InvokeAsync("MemberView")
+        <section class="team" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+            <div class="container">
+
+                <div class="row">
+                    @foreach (var mb in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                            <div class="member">
+                                <div class="member-img">
+                                    <img src="@mb.Image" class=" img-member" alt="">
+                                    <div class="social">
+                                        <a href=""><i class="bi bi-facebook"></i></a>
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                        <a href=""><i class="bi bi-linkedin"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="member-info">
+                                    <h4>@mb.Name</h4>
+                                    <span>@mb.WorkPosition</span>
+                                    <p>@mb.Detail</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class=".pagination-container">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, LiElementClasses = new[] { "pagination-item" } })
+                </div>
+            </div>
+        </section>
 
     </main><!-- End #main -->
 </body>

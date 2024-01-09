@@ -94,16 +94,16 @@
                                             <h6 class="fw-semibold mb-0 truncate-text">@item.Message</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                                <h6 class="fw-semibold mb-0">
+                                                <div class="d-flex align-items-center gap-2">
                                                     @if (item.IsRead)
                                                     {
-                                                        <span class="text-success">Đã đọc</span>
+                                                        <span class="badge bg-secondary rounded-3 fw-semibold">Đã đọc</span>
                                                     }
                                                     else
                                                     {
-                                                        <span class="text-danger">Chưa đọc</span>
+                                                        <span class="badge bg-danger rounded-3 fw-semibold">Chưa đọc</span>
                                                     }
-                                                </h6>
+                                                </div>
                                         </td>
                                         @* <td class="border-bottom-0">
                                             <h6 class="fw-semibold mb-0 truncate-text">@item.CreatedDate</h6>

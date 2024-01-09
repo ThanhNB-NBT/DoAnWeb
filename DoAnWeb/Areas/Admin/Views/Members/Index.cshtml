@@ -96,16 +96,16 @@
                                             <h6 class="fw-semibold mb-0 truncate-text">@item.Message</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">
+                                            <div class="d-flex align-items-center gap-2">
                                                 @if (item.IsActive)
                                                 {
-                                                    <span class="text-success">Có</span>
+                                                    <span class="badge bg-secondary rounded-3 fw-semibold">Có</span>
                                                 }
                                                 else
                                                 {
-                                                    <span class="text-danger">Không</span>
+                                                    <span class="badge bg-danger rounded-3 fw-semibold">Không</span>
                                                 }
-                                            </h6>
+                                            </div>
                                         </td>
                                         <td class="border-bottom-0">
                                             <a asp-action="Edit" asp-route-id="@item.MemberId" class="btn btn-danger btn-sm">Sửa</a> |

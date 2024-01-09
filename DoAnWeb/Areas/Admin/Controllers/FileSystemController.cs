@@ -44,7 +44,7 @@ namespace DoAnWeb.Areas.Admin.Controllers
             // .. ... wwww/files
             string rootDirectory = Path.Combine(_env.WebRootPath, pathroot);
 
-            // https://localhost:5001/files/
+            
             string url = $"/{pathroot}/";
             string urlthumb = $"{uri.Scheme}://Admin/el-finder-file-system/thumb/";
 

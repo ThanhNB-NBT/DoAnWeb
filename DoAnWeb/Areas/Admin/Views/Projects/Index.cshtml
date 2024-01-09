@@ -93,16 +93,16 @@
                                             <h6 class="fw-semibold mb-0">@item.ProjectName</h6>
                                         </td>
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">
-                                                    @if (item.IsActive)
-                                                    {
-                                                    <span class="text-success">Có</span>
-                                                    }
-                                                    else
-                                                    {
-                                                    <span class="text-danger">Không</span>
-                                                    }
-                                            </h6>
+                                            <div class="d-flex align-items-center gap-2">
+                                                @if (item.IsActive)
+                                                {
+                                                <span class="badge bg-secondary rounded-3 fw-semibold">Có</span>
+                                                }
+                                                else
+                                                {
+                                                <span class="badge bg-danger rounded-3 fw-semibold">Không</span>
+                                                }
+                                            </div>
                                         </td>
                                         <td class="border-bottom-0">
                                             <img style="max-width: 30px;height: auto;" src="@item.Image" />
