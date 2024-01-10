@@ -54,11 +54,11 @@
                                             <i class="ti ti-user fs-5"></i>
                                             <p class="mb-0 fs-4 fw-semi">@Functions._UserName</p>
                                         </a>
-                                        @* <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-mail fs-6"></i>
-                                            <p class="mb-0 fs-3">My Account</p>
+                                        <a asp-action="ChangePassword" asp-controller="Accounts" asp-route-id="@Functions._AccountId" class="d-flex align-items-center gap-2 dropdown-item">
+                                            <i class="ti ti-pencil-plus fs-6"></i>
+                                            <p class="mb-0 fs-3">Đổi mật khẩu</p>
                                         </a>
-                                        <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                        @* <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-list-check fs-6"></i>
                                             <p class="mb-0 fs-3">My Task</p>
                                         </a> *@

@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Details";
+    var successMessage = TempData["SuccessMessage"] as string;
+    TempData["SuccessMessage"] = null;
 }
 
 <div class="container-fluid">
@@ -9,6 +11,12 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">Thông tin cá nhân</h5>
+                @if (!string.IsNullOrEmpty(successMessage))
+                {
+                    <div id="successAlert" class="alert alert-success">
+                        @successMessage
+                    </div>
+                }
                 <div class="card">
                     <div class="card-body">
                         <h4>@Model.FullName</h4>
@@ -74,7 +82,7 @@
                     </div>
                 </div>
                 <div>
-                    @* <a asp-action="Edit" asp-route-id="@Model?.AccountId" class="btn btn-danger btn-edit m-1">Sửa</a> | *@
+                    <a asp-action="ChangePassword" asp-route-id="@Model?.AccountId" class="btn btn-danger btn-edit m-1">Đổi mật khẩu</a> |
                     <a asp-action="Index" asp-controller="Home" type="button" class="btn btn-outline-primary m-1">Quay lại</a>
                 </div>
             </div>

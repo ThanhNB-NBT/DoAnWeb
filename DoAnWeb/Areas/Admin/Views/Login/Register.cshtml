@@ -30,23 +30,23 @@
                                 <form asp-controller="Login" asp-action="Register" method="post">
                                     <div class="mb-3">
                                         <label for="fullname" class="form-label">Họ và Tên</label>
-                                        <input type="text" class="form-control" id="fullname" name="FullName" required>
+                                        <input type="text" class="form-control" id="fullname" name="FullName" autocomplete="off" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Tài khoản</label>
-                                        <input type="text" class="form-control" id="username" name="UserName" required>
+                                        <input type="text" class="form-control" id="username" name="UserName" autocomplete="off" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="Email" required>
+                                        <input type="email" class="form-control" id="email" name="Email" autocomplete="off" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">Điện thoại</label>
-                                        <input type="text" class="form-control" id="phone" name="Phone" required>
+                                        <input type="text" class="form-control" id="phone" name="Phone" autocomplete="off" required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="password" class="form-label">Mật khẩu</label>
-                                        <input type="password" class="form-control" id="password" name="Password" required>
+                                        <input type="password" class="form-control" id="password" name="Password" autocomplete="off" required>
                                     </div>
                                     @if (!string.IsNullOrEmpty(successMessage))
                                     {
@@ -73,5 +73,14 @@
     </div>
     <script src="~/admin/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="~/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Ẩn thông báo sau 2 giây (2000 milliseconds)
+            setTimeout(function () {
+                $("#successAlert").fadeOut(500);
+                $("#errorAlert").fadeOut(500);
+            }, 2000);
+        });
+    </script>
 </body>
 </html>

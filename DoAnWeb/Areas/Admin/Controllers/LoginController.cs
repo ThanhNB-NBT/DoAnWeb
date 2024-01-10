@@ -84,7 +84,7 @@ namespace DoAnWeb.Areas.Admin.Controllers
                 // Kiểm tra trùng lặp tên đăng nhập
                 if (_context.Accounts.Any(u => u.UserName == model.UserName))
                 {
-                    TempData["ErrorMessage"] = "Tên đăng nhập đã tồn tại!";
+                    TempData["ErrorMessage"] = "Tài khoản đã tồn tại!";
                 }
                 // Kiểm tra trùng lặp email
                 else if (_context.Accounts.Any(u => u.Email == model.Email))

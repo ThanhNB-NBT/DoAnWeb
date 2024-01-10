@@ -186,5 +186,64 @@ namespace DoAnWeb.Areas.Admin.Controllers
         {
             return _context.Accounts.Any(e => e.AccountId == id);
         }
+
+        // GET: Admin/Accounts/Delete/5
+        public async Task<IActionResult> ChangePasswordAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+
+            var account = await _context.Accounts.FindAsync(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
+            // Tạo một đối tượng ChangePassword từ dữ liệu của Account
+            var changePasswordModel = new ChangePassword
+            {
+                AccountId = account.AccountId
+                // Các trường khác có thể cần được thiết lập tùy thuộc vào yêu cầu của bạn
+            };
+
+            return View(changePasswordModel);
+        }
+        [HttpPost, ActionName("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePassword model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Kiểm tra mật khẩu hiện tại
+                var user = await _context.Accounts.FindAsync(model.AccountId);
+
+                if (user != null && BCrypt.Net.BCrypt.Verify(model.CurrentPassword, user.Password))
+                {
+                    // Kiểm tra mật khẩu mới và xác nhận mật khẩu
+                    if (model.NewPassword == model.ConfirmPassword)
+                    {
+                        // Lưu mật khẩu mới vào cơ sở dữ liệu
+                        user.Password = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
+                        await _context.SaveChangesAsync();
+
+                        TempData["SuccessMessage"] = "Mật khẩu đã được thay đổi thành công!";
+                        return RedirectToAction("Details", "Accounts", new { id = model.AccountId });
+
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Mật khẩu mới và xác nhận mật khẩu không khớp!";
+                    }
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Mật khẩu hiện tại không đúng!";
+                }
+            }
+
+            return View("ChangePassword", model);
+        }
+
     }
 }
